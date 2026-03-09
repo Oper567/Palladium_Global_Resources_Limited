@@ -2,27 +2,49 @@
 @import "tailwindcss";
 
 @theme {
-  /* Palladium Global UI Palette */
-  
-  /* Primary: Dark Olive Green */
-  --color-brand-primary: #3f4d21; 
-  
-  /* Accent: Safety Yellow */
-  --color-brand-accent: #facc15;  
-  
-  /* Background: Subtle Professional Gray */
-  --color-brand-light: #f8fafc;   
+  /* --- Palladium Global UI Palette --- */
+  --color-brand-primary: #3f4d21; /* Dark Olive Green */
+  --color-brand-accent: #facc15;  /* Safety Yellow */
+  --color-brand-light: #f8fafc;   /* Subtle Professional Gray */
   
   --font-serif: "Playfair Display", serif; 
+
+  /* --- Custom Animations --- */
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes fade-up {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
 }
 
 @layer base {
   html {
     @apply scroll-smooth;
+    /* GLOBAL FIX: Stabilizes font scaling and rendering on mobile */
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
     @apply bg-white text-slate-900 antialiased;
+    /* GLOBAL FIX: Prevents horizontal wavering and ensures consistent spacing */
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* GLOBAL FIX: Prevents "scattered" gaps between words on small screens */
+  p {
+    @apply break-words;
+    letter-spacing: -0.01em;
   }
 
   ::selection {
@@ -31,15 +53,29 @@
 }
 
 @layer utilities {
+  /* --- Specialized Typography --- */
   .text-track-record {
     font-family: var(--font-serif);
     @apply text-3xl md:text-4xl text-brand-primary italic 
-           font-medium leading-tight;
+           font-medium leading-tight tracking-tight;
   }
 
-  /* Industrial Card Border */
+  /* --- Industrial & Interactive UI Elements --- */
   .border-industrial {
     @apply border-2 border-slate-200 hover:border-brand-accent 
            transition-colors duration-300;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-500 ease-out 
+           hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(63,77,33,0.3)];
+  }
+
+  /* Utility for fluid text gaps */
+  .stable-text {
+    text-align: left;
+    @screen lg {
+      text-align: justify;
+    }
   }
 }

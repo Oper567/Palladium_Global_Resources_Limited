@@ -5,62 +5,68 @@ const ProjectGallery = () => {
   // the PDF's architectural portfolio
   const photos = [
     {
-      url: 'https://images.unsplash.com/photo-1555633514-abcee6ad93e1?w=800&q=80',
+      url: 'Aca.png',
       title: 'Academic Campus Overview'
     },
     {
-      url: 'https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=800&q=80',
+      url: 'Academy.png',
       title: 'Modern Multi-Story Complex'
     },
     {
-      url: 'https://images.unsplash.com/photo-1518005020251-58296b8a879d?w=800&q=80',
+      url: 'Circular.png',
       title: 'Circular Institutional Building'
     },
     {
-      url: 'https://images.unsplash.com/photo-1495908333425-29a1e0918c5f?w=800&q=80',
+      url: 'infras.png',
       title: 'Theater & Auditorium Structure'
     },
     {
-      url: 'https://images.unsplash.com/photo-1590486803833-1c5dc8ddd4c8?w=800&q=80',
+      url: 'last.png',
       title: 'Infrastructural Development'
     },
     {
-      url: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80',
+      url: 'kk.png',
       title: 'Strategic Site Construction'
     }
   ];
 
   return (
-    <section className="py-24 bg-brand-light overflow-hidden">
+    <section className="py-16 lg:py-24 bg-brand-light overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         
-        {/* Section Header - Bold and authoritative Olive Green */}
-        <div className="flex flex-col items-center text-center mb-16">
+        {/* Section Header - Mobile Optimized Spacing */}
+        <div className="flex flex-col items-center text-center mb-12 lg:mb-20 w-full">
           <h2 className="
-            text-4xl md:text-5xl font-black text-brand-primary 
-            uppercase tracking-[0.1em] mb-4
+            text-3xl lg:text-4xl font-black text-brand-primary 
+            uppercase tracking-[0.1em] mb-4 break-words
           ">
             Project Photos
           </h2>
-          <div className="w-20 h-1.5 bg-brand-accent mb-6"></div>
+          <div className="
+            w-16 lg:w-20 h-1.5 bg-brand-accent mb-4 lg:mb-6 rounded-full
+          "></div>
+          {/* Added break-words to ensure perfect mobile wrap */}
           <p className="
-            text-gray-600 max-w-2xl font-medium tracking-wide
+            text-gray-600 max-w-2xl font-medium tracking-wide 
+            text-sm lg:text-base break-words
           ">
             A visual showcase of our commitment to infrastructure 
             development and engineering excellence across Nigeria.
           </p>
         </div>
 
-        {/* Project Grid Layout */}
+        {/* Project Grid Layout - Fluid Responsive Heights & Gaps */}
         <div className="
-          grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6
+          grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
+          gap-4 md:gap-6 lg:gap-8
         ">
           {photos.map((project, index) => (
             <div 
               key={index} 
               className="
-                group relative h-[350px] overflow-hidden 
-                bg-brand-primary shadow-lg rounded-sm
+                group relative h-72 lg:h-[350px] overflow-hidden 
+                bg-brand-primary shadow-md hover:shadow-xl 
+                rounded-sm transition-shadow duration-300
               "
             >
               {/* Main Project Image */}
@@ -77,26 +83,29 @@ const ProjectGallery = () => {
               {/* Dark Olive Green Hover Overlay */}
               <div className="
                 absolute inset-0 flex flex-col items-center 
-                justify-center p-8 opacity-0 group-hover:opacity-100 
+                justify-center p-6 lg:p-8 opacity-0 group-hover:opacity-100 
                 transition-opacity duration-500 bg-brand-primary/80
               ">
                 <div className="
-                  w-12 h-1 bg-brand-accent mb-4 transform -translate-y-4 
-                  group-hover:translate-y-0 transition-transform 
-                  duration-500 delay-100
+                  w-10 lg:w-12 h-1 bg-brand-accent mb-3 lg:mb-4 
+                  transform -translate-y-4 group-hover:translate-y-0 
+                  transition-transform duration-500 delay-100
                 "></div>
+                
+                {/* Added break-words to prevent long titles from spilling out */}
                 <h3 className="
-                  text-white text-lg font-bold uppercase tracking-widest 
-                  text-center mb-3 transform -translate-y-4 
-                  group-hover:translate-y-0 transition-transform 
-                  duration-500 delay-200
+                  text-white text-base lg:text-lg font-bold uppercase 
+                  tracking-widest text-center mb-2 lg:mb-3 transform 
+                  -translate-y-4 group-hover:translate-y-0 
+                  transition-transform duration-500 delay-200 break-words
                 ">
                   {project.title}
                 </h3>
+                
                 <span className="
-                  text-brand-accent text-xs font-black uppercase 
-                  tracking-[0.2em] border-b border-brand-accent pb-1 
-                  transform -translate-y-4 group-hover:translate-y-0 
+                  text-brand-accent text-[10px] lg:text-xs font-black 
+                  uppercase tracking-[0.2em] border-b border-brand-accent 
+                  pb-1 transform -translate-y-4 group-hover:translate-y-0 
                   transition-transform duration-500 delay-300
                 ">
                   View Details

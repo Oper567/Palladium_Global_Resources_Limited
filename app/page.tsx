@@ -21,13 +21,9 @@ import ComplianceSection from '../components/ComplianceSection';
 
 export default function Home() {
   return (
-    <main 
-      className="
-        flex flex-col min-h-screen selection:bg-brand-accent 
-        selection:text-brand-primary scroll-smooth
-      "
-    >
-      
+    // We use a React Fragment (<></>) here because the <main> tag 
+    // is already safely wrapping this content inside layout.tsx
+    <>
       {/* Section: Hero 
           Captures the 'Let's Build Together' cover page impact.
       */}
@@ -62,7 +58,6 @@ export default function Home() {
           Official regulatory clearance and certification display.
       */}
       <ComplianceSection />
-
-    </main>
+    </>
   );
 }

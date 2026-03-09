@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Header from '../components/Header';
@@ -8,47 +8,80 @@ const inter = Inter({ subsets: ['latin'] });
 
 /**
  * PALLADIUM GLOBAL RESOURCES LIMITED - ROOT LAYOUT
- * Sets the global architectural shell for the application.
+ * Sets the global architectural shell and SEO Metadata.
  */
 
+// 1. Export Viewport Separately (Next.js 14+ Standard)
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
+
+// 2. Export Core SEO Metadata
 export const metadata: Metadata = {
-  title: 'Palladium Global Resources Limited | Reshaping Nigeria’s Economy',
-  description: `A proudly Nigerian conglomerate committed to reshaping the 
-    nation's economic landscape through strategic investments in 
-    industrialization, innovation, and infrastructure development.`,
-  viewport: 'width=device-width, initial-scale=1',
+  // Replace with your custom domain when you have one
+  metadataBase: new URL('https://palladium-global-resources-limited-beryl.vercel.app/'),
+  title: 'Palladium Global Resources Limited | Engineering & Infrastructure',
+  description: `A proudly Nigerian conglomerate reshaping the nation's economic landscape through strategic investments in civil engineering, downstream energy, ICT, and supply chain logistics.`,
+  keywords: [
+    'Palladium Global', 'Civil Engineering Nigeria', 'Downstream Energy', 
+    'Supply Chain Logistics', 'ICT Management', 'Infrastructure Development',
+    'Construction Company Abuja', 'Energy Services Delta'
+  ],
+  authors: [{ name: 'Palladium Global Resources Limited' }],
+  creator: 'Palladium Global Resources Limited',
+  publisher: 'Palladium Global Resources Limited',
+  
+  // Open Graph for LinkedIn, Facebook, and WhatsApp sharing
+  openGraph: {
+    type: 'website',
+    locale: 'en_NG',
+    url: '/', 
+    siteName: 'Palladium Global Resources',
+    title: 'Palladium Global | Building Nigeria’s Future',
+    description: `Leading the way in civil engineering, energy, and infrastructure development across Nigeria. Start Now, Grow Big.`,
+    images: [
+      {
+        // Displays your Hero background image when shared
+        url: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=630&fit=crop&q=80',
+        width: 1200,
+        height: 630,
+        alt: 'Palladium Global Corporate Infrastructure',
+      },
+    ],
+  },
+  
+  // Twitter Card for X (Twitter) sharing
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Palladium Global Resources Limited',
+    description: 'Strategic investments in industrialization, innovation, and infrastructure.',
+    images: ['https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=630&fit=crop&q=80'],
+  },
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en" className="scroll-smooth">
       <body 
         className={`
-          ${inter.className} bg-white text-gray-900 antialiased 
+          ${inter.className} bg-brand-light text-slate-900 antialiased 
           selection:bg-brand-accent selection:text-brand-primary
         `}
       >
-        
-        {/* Global Flexbox Shell: Ensures Footer stays at bottom on short pages */}
+        {/* Global Flexbox Shell */}
         <div className="flex flex-col min-h-screen">
-          
-          {/* Global Header: Contains TopBar (RC Number/Contacts) and Main Nav */}
           <Header />
-          
-          {/* Main Content Area: flex-grow allows this to fill the screen */}
           <main className="flex-grow">
             {children}
           </main>
-          
-          {/* Global Footer: Contains all 3 Office Locations and Quick Links */}
           <Footer />
-          
         </div>
-
       </body>
     </html>
   );

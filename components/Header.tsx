@@ -83,29 +83,40 @@ const Header = () => {
 
       {/* Main Navbar */}
       <div className="
-        max-w-7xl mx-auto px-6 lg:px-8 py-5 flex 
+        max-w-7xl mx-auto px-6 lg:px-8 py-4 flex 
         justify-between items-center
       ">
         
-        {/* Logo Flexbox */}
+        {/* Logo Flexbox (Now with Image Support) */}
         <div 
-          className="flex flex-col group cursor-pointer" 
+          className="flex items-center gap-3 group cursor-pointer" 
           onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
         >
-          <h1 className="
-            text-2xl md:text-3xl font-black text-brand-primary 
-            uppercase leading-none tracking-tighter 
-            group-hover:text-brand-accent transition-colors 
-            duration-300
-          ">
-            Palladium Global
-          </h1>
-          <h2 className="
-            text-[10px] md:text-sm font-bold text-slate-500 
-            tracking-[0.28em] uppercase mt-1
-          ">
-            Resources Limited
-          </h2>
+          {/* Make sure to save the logo I generated as logo.png in your /public folder */}
+          <img 
+            src="logo.png" 
+            alt="Palladium Global Logo" 
+            className="
+              w-10 h-10 md:w-12 md:h-12 object-contain 
+              group-hover:scale-105 transition-transform duration-300
+            "
+          />
+          <div className="flex flex-col">
+            <h1 className="
+              text-xl md:text-2xl font-black text-brand-primary 
+              uppercase leading-none tracking-tighter 
+              group-hover:text-brand-accent transition-colors 
+              duration-300
+            ">
+              Palladium Global
+            </h1>
+            <h2 className="
+              text-[9px] md:text-[11px] font-bold text-slate-500 
+              tracking-[0.25em] uppercase mt-0.5
+            ">
+              Resources Limited
+            </h2>
+          </div>
         </div>
         
         {/* Desktop Nav Flexbox */}

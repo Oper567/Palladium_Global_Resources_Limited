@@ -11,13 +11,13 @@ const Footer = () => {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         
-        {/* Top Flexbox Layout */}
+        {/* Top Responsive Grid Layout */}
         <div className="
-          flex flex-col lg:flex-row justify-between gap-12 
-          lg:gap-8 mb-16
+          grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-row 
+          justify-between gap-12 lg:gap-8 mb-16
         ">
           
-          {/* Brand Info Flex Column */}
+          {/* Brand Info Column */}
           <div className="flex flex-col w-full lg:w-1/4">
             <h2 className="
               text-2xl font-black text-white uppercase 
@@ -46,7 +46,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links Flex Column */}
+          {/* Quick Links Column */}
           <div className="flex flex-col w-full lg:w-1/6">
             <h3 className="
               text-lg font-black text-white uppercase tracking-wider 
@@ -91,7 +91,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Details Flex Column */}
+          {/* Contact Details Column */}
           <div className="flex flex-col w-full lg:w-1/4">
             <h3 className="
               text-lg font-black text-white uppercase tracking-wider 
@@ -122,8 +122,8 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Office Locations Flex Column */}
-          <div className="flex flex-col w-full lg:w-1/3">
+          {/* Office Locations Column */}
+          <div className="flex flex-col w-full lg:w-1/3 md:col-span-2 lg:col-span-1">
             <h3 className="
               text-lg font-black text-white uppercase tracking-wider 
               mb-6 border-b border-white/20 pb-2 inline-block self-start

@@ -6,23 +6,61 @@ const ContactSection = () => {
   const [formData, setFormData] = useState({ 
     name: '', 
     email: '', 
-    subject: '', 
+    subject: 'General Inquiry', // Set default to match select box
     message: '' 
   });
+  
+  // Added states for UX feedback
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a production environment, this would post to your Next.js API route
-    console.log('Form submission data:', formData);
-    alert('Thank you for your message. Our team will get back to you shortly.');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          // Replace this string with your actual access key
+          access_key: "YOUR_WEB3FORMS_ACCESS_KEY", 
+          from_name: formData.name,
+          subject: `New Palladium Global Inquiry: ${formData.subject}`,
+          ...formData
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', subject: 'General Inquiry', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+      
+      // Clear success message after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus('idle');
+      }, 5000);
+    }
   };
 
   return (
     <section 
       id="contact" 
       className="
-        py-24 bg-gray-50 border-t border-gray-200 
+        py-24 bg-brand-light border-t border-slate-200 
         relative overflow-hidden
       "
     >
@@ -37,7 +75,7 @@ const ContactSection = () => {
         {/* Unified Split-Card Flexbox Container */}
         <div className="
           flex flex-col lg:flex-row w-full bg-white rounded-sm 
-          shadow-2xl overflow-hidden border border-gray-100
+          shadow-2xl overflow-hidden border border-slate-100
         ">
           
           {/* Left Panel: Contact Information */}
@@ -105,7 +143,7 @@ const ContactSection = () => {
                         transition-colors break-all
                       "
                     >
-                      palladiumglobalresources<br/>@gmail.com [cite: 12]
+                      palladiumglobalresources<br/>@gmail.com
                     </a>
                   </div>
                 </div>
@@ -144,7 +182,7 @@ const ContactSection = () => {
                     </h3>
                     <p className="text-lg font-medium">
                       +234-806-660-5477 <br/> 
-                      +234-807-176-4059 [cite: 11]
+                      +234-807-176-4059
                     </p>
                   </div>
                 </div>
@@ -174,7 +212,7 @@ const ContactSection = () => {
                   <label 
                     htmlFor="name" 
                     className="
-                      block text-xs font-bold text-gray-500 
+                      block text-xs font-bold text-slate-500 
                       uppercase tracking-wider mb-2
                     "
                   >
@@ -187,8 +225,8 @@ const ContactSection = () => {
                     value={formData.name} 
                     onChange={(e) => setFormData({...formData, name: e.target.value})} 
                     className="
-                      w-full bg-gray-50 border border-gray-200 
-                      text-gray-900 rounded-sm py-3 px-4 focus:outline-none 
+                      w-full bg-slate-50 border border-slate-200 
+                      text-slate-900 rounded-sm py-3 px-4 focus:outline-none 
                       focus:ring-2 focus:ring-brand-accent 
                       focus:border-transparent transition-all
                     " 
@@ -200,7 +238,7 @@ const ContactSection = () => {
                   <label 
                     htmlFor="email" 
                     className="
-                      block text-xs font-bold text-gray-500 
+                      block text-xs font-bold text-slate-500 
                       uppercase tracking-wider mb-2
                     "
                   >
@@ -213,8 +251,8 @@ const ContactSection = () => {
                     value={formData.email} 
                     onChange={(e) => setFormData({...formData, email: e.target.value})} 
                     className="
-                      w-full bg-gray-50 border border-gray-200 
-                      text-gray-900 rounded-sm py-3 px-4 focus:outline-none 
+                      w-full bg-slate-50 border border-slate-200 
+                      text-slate-900 rounded-sm py-3 px-4 focus:outline-none 
                       focus:ring-2 focus:ring-brand-accent 
                       focus:border-transparent transition-all
                     " 
@@ -228,7 +266,7 @@ const ContactSection = () => {
                 <label 
                   htmlFor="subject" 
                   className="
-                    block text-xs font-bold text-gray-500 
+                    block text-xs font-bold text-slate-500 
                     uppercase tracking-wider mb-2
                   "
                 >
@@ -239,8 +277,8 @@ const ContactSection = () => {
                   value={formData.subject} 
                   onChange={(e) => setFormData({...formData, subject: e.target.value})} 
                   className="
-                    w-full bg-gray-50 border border-gray-200 
-                    text-gray-900 rounded-sm py-3 px-4 focus:outline-none 
+                    w-full bg-slate-50 border border-slate-200 
+                    text-slate-900 rounded-sm py-3 px-4 focus:outline-none 
                     focus:ring-2 focus:ring-brand-accent 
                     focus:border-transparent transition-all
                   "
@@ -259,7 +297,7 @@ const ContactSection = () => {
                 <label 
                   htmlFor="message" 
                   className="
-                    block text-xs font-bold text-gray-500 
+                    block text-xs font-bold text-slate-500 
                     uppercase tracking-wider mb-2
                   "
                 >
@@ -272,7 +310,7 @@ const ContactSection = () => {
                   value={formData.message} 
                   onChange={(e) => setFormData({...formData, message: e.target.value})} 
                   className="
-                    w-full bg-gray-50 border border-gray-200 text-gray-900 
+                    w-full bg-slate-50 border border-slate-200 text-slate-900 
                     rounded-sm py-3 px-4 focus:outline-none focus:ring-2 
                     focus:ring-brand-accent focus:border-transparent 
                     transition-all resize-none
@@ -281,18 +319,32 @@ const ContactSection = () => {
                 />
               </div>
               
+              {/* Status Messages */}
+              {submitStatus === 'success' && (
+                <div className="p-4 bg-green-50 text-green-800 border-l-4 border-green-500 text-sm font-medium">
+                  Thank you! Your inquiry has been sent to our team successfully.
+                </div>
+              )}
+              {submitStatus === 'error' && (
+                <div className="p-4 bg-red-50 text-red-800 border-l-4 border-red-500 text-sm font-medium">
+                  Oops! Something went wrong. Please try emailing us directly.
+                </div>
+              )}
+
               {/* Submit Button */}
               <button 
                 type="submit" 
+                disabled={isSubmitting}
                 className="
                   self-start px-10 py-4 bg-brand-primary text-white 
                   font-black uppercase tracking-widest text-sm rounded-sm 
                   hover:bg-brand-accent hover:text-brand-primary 
                   transition-all shadow-md mt-2 focus:outline-none 
                   focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary
+                  disabled:opacity-70 disabled:cursor-not-allowed
                 "
               >
-                Submit Inquiry
+                {isSubmitting ? 'Sending...' : 'Submit Inquiry'}
               </button>
             </form>
           </div>
