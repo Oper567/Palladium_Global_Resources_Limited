@@ -1,26 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Palladium Global UI Palette */
+  
+  /* Primary: Dark Olive Green */
+  --color-brand-primary: #3f4d21; 
+  
+  /* Accent: Safety Yellow */
+  --color-brand-accent: #facc15;  
+  
+  /* Background: Subtle Professional Gray */
+  --color-brand-light: #f8fafc;   
+  
+  --font-serif: "Playfair Display", serif; 
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    @apply bg-white text-slate-900 antialiased;
+  }
+
+  ::selection {
+    @apply bg-brand-accent text-brand-primary;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .text-track-record {
+    font-family: var(--font-serif);
+    @apply text-3xl md:text-4xl text-brand-primary italic 
+           font-medium leading-tight;
+  }
+
+  /* Industrial Card Border */
+  .border-industrial {
+    @apply border-2 border-slate-200 hover:border-brand-accent 
+           transition-colors duration-300;
+  }
 }
