@@ -36,9 +36,9 @@
 
   body {
     @apply bg-white text-slate-900 antialiased;
-    /* GLOBAL FIX: Prevents horizontal wavering and ensures consistent spacing */
+    /* FIX: Changed 'hidden' to 'clip' so the floating Header isn't broken */
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   /* GLOBAL FIX: Prevents "scattered" gaps between words on small screens */
@@ -71,7 +71,7 @@
            hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(63,77,33,0.3)];
   }
 
-  /* Utility for fluid text gaps (FIXED FOR NETLIFY BUILD) */
+  /* Utility for fluid text gaps */
   .stable-text {
     text-align: left;
   }
